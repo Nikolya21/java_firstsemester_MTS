@@ -1,0 +1,19 @@
+name: Print Date and Time
+
+on:
+  push:
+    branches: '*'
+  pull_request:
+    branches: '*'
+
+jobs:
+  print-time:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Print current date and time
+        run: |
+          echo "Current date: $(date)"
+          echo "Current time: $(date +%T)"
