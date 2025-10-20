@@ -71,7 +71,7 @@ public class CustomArrayList<A> implements CustomList<A>, Iterable<A> {
     }
 
     public A next() {
-      while(!hasNext()) {
+      if(!hasNext()) {
         throw new NoSuchElementException();
       }
       return (A) massive[currentIndex++];
