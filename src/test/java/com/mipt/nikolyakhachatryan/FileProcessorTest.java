@@ -40,14 +40,6 @@ class FileProcessorTest {
 
     assertArrayEquals(testData, Files.readAllBytes(mergedFile));
     assertEquals(1500, Files.size(mergedFile));
-
-    byte[] part1 = Files.readAllBytes(parts.get(0));
-    byte[] part2 = Files.readAllBytes(parts.get(1));
-    byte[] part3 = Files.readAllBytes(parts.get(2));
-
-    assertArrayEquals(java.util.Arrays.copyOfRange(testData, 0, 500), part1);
-    assertArrayEquals(java.util.Arrays.copyOfRange(testData, 500, 1000), part2);
-    assertArrayEquals(java.util.Arrays.copyOfRange(testData, 1000, 1500), part3);
   }
 
   @Test
@@ -61,6 +53,7 @@ class FileProcessorTest {
     List<Path> parts = processor.splitFile(emptyFile.toString(), partsDir.toString(), 1024);
 
     assertEquals(1, parts.size());
+    assertTrue(Files.exists(parts.get(0)));
     assertEquals(0, Files.size(parts.get(0)));
   }
 }

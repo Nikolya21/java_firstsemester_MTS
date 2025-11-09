@@ -42,18 +42,22 @@ public class TextFileAnalyzer {
     long charCount = 0;
     Map<Character, Long> charFrequency = new HashMap<>();
 
-    try (BufferedReader reader = new BufferedReader(new FileReader(filePath, StandardCharsets.UTF_8))) {
+    try (BufferedReader reader = new BufferedReader(
+      new InputStreamReader(new FileInputStream(filePath), StandardCharsets.UTF_8))) {
+
       String line;
       while ((line = reader.readLine()) != null) {
         lineCount++;
-        charCount += line.length();
-        charCount++;
+        charCount += line.length() + 1;
+
         for (char c : line.toCharArray()) {
           charFrequency.merge(c, 1L, Long::sum);
         }
         charFrequency.merge('\n', 1L, Long::sum);
-        String[] words = line.trim().split("\\s+");
-        if (!line.trim().isEmpty()) {
+
+        String trimmed = line.trim();
+        if (!trimmed.isEmpty()) {
+          String[] words = trimmed.split("\\s+");
           wordCount += words.length;
         }
       }
@@ -61,13 +65,17 @@ public class TextFileAnalyzer {
 
     return new AnalysisResult(lineCount, wordCount, charCount, charFrequency);
   }
+
   public void saveAnalysisResult(AnalysisResult result, String outputPath) throws IOException {
-    try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputPath, StandardCharsets.UTF_8))) {
-      writer.write("=== Результат анализа текстового файла ===\n");
-      writer.write("Количество строк: " + result.getLineCount() + "\n");
-      writer.write("Количество слов: " + result.getWordCount() + "\n");
-      writer.write("Количество символов: " + result.getCharCount() + "\n");
+    try (BufferedWriter writer = new BufferedWriter(
+      new OutputStreamWriter(new FileOutputStream(outputPath), StandardCharsets.UTF_8))) {
+
+      writer.write("=== Анализ текстового файла ===\n");
+      writer.write("Строк: " + result.getLineCount() + "\n");
+      writer.write("Слов: " + result.getWordCount() + "\n");
+      writer.write("Символов: " + result.getCharCount() + "\n");
       writer.write("\nЧастота символов:\n");
+
       result.getCharFrequency().entrySet().stream()
         .sorted(Map.Entry.comparingByKey())
         .forEach(entry -> {
