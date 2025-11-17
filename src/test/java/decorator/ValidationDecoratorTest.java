@@ -1,6 +1,6 @@
 package decorator;
 
-import com.mipt.nikolyakhachatryan.decorator.DataService;
+import com.mipt.nikolyakhachatryan.decorator.repository.DataService;
 import com.mipt.nikolyakhachatryan.decorator.SimpleDataService;
 import com.mipt.nikolyakhachatryan.decorator.ValidationDecorator;
 import org.junit.jupiter.api.Test;

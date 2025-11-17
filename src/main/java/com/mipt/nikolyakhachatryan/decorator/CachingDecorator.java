@@ -1,5 +1,7 @@
 package com.mipt.nikolyakhachatryan.decorator;
 
+import com.mipt.nikolyakhachatryan.decorator.repository.DataService;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -20,13 +22,13 @@ public class CachingDecorator implements DataService {
   @Override
   public void saveData(String key, String data) {
     delegate.saveData(key, data);
-    cache.put(key, Optional.of(data));  // обновляем кэш
+    cache.put(key, Optional.of(data));
   }
 
   @Override
   public boolean deleteData(String key) {
     boolean removed = delegate.deleteData(key);
-    cache.remove(key);  // инвалидируем кэш
+    cache.remove(key);
     return removed;
   }
 }

@@ -1,4 +1,4 @@
-package com.mipt.nikolyakhachatryan.decorator;
+package com.mipt.nikolyakhachatryan.decorator.repository;
 
 import java.util.Optional;
 

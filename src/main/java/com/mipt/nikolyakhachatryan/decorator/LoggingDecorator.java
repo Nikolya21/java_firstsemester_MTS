@@ -1,5 +1,7 @@
 package com.mipt.nikolyakhachatryan.decorator;
 
+import com.mipt.nikolyakhachatryan.decorator.repository.DataService;
+
 import java.util.Optional;
 
 public class LoggingDecorator implements DataService {

@@ -1,6 +1,6 @@
 package decorator;
 
-import com.mipt.nikolyakhachatryan.decorator.DataService;
+import com.mipt.nikolyakhachatryan.decorator.repository.DataService;
 import com.mipt.nikolyakhachatryan.decorator.MetricableDecorator;
 import com.mipt.nikolyakhachatryan.decorator.SimpleDataService;
 import org.junit.jupiter.api.AfterEach;
