@@ -1,0 +1,26 @@
+package com.mipt.nikolyakhachatryan.decorator;
+
+import com.mipt.nikolyakhachatryan.decorator.repository.DataService;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+public class SimpleDataService implements DataService {
+  private final Map<String, String> storage = new HashMap<>();
+
+  @Override
+  public Optional<String> findDataByKey(String key) {
+    return Optional.ofNullable(storage.get(key));
+  }
+
+  @Override
+  public void saveData(String key, String data) {
+    storage.put(key, data);
+  }
+
+  @Override
+  public boolean deleteData(String key) {
+    return storage.remove(key) != null;
+  }
+}
